@@ -1,0 +1,23 @@
+
+
+
+
+
+{#  
+ {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-outline-danger">{{ button_label|default('Save') }}</button>
+
+    {{ form_end(form) }}
+    {% endif %}#}
+
+{{ form_start(form) }}
+
+    {{form_row(form.sujet,{'label':'Sujet','attr':{'placeholder':'sujet'}})}}
+    {{form_row(form.message,{'label':' message','attr':{'placeholder':'Veillez rentrer votre message ...', 'required':'true',}})}}
+  
+        <button class="btn btn-outline-danger mb-1 mt-2">{{ button_label|default('Envoyer') }}</button>
+
+
+{{ form_end(form) }}
+

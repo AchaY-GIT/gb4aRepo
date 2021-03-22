@@ -1,0 +1,13 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits index{% endblock %}
+
+{% block body %}
+<h1>Nouveau contact</h1>
+<p>Nom : GB4A</p>
+<h2>Mail concernant le {{contacte.sujet}}</h2>
+
+<p>e-mail : {{ contacte.email }}</p>
+<p>Message : {{ contacte.reponce|raw }}</p>
+{% endblock %}

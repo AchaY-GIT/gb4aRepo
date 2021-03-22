@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block title %}Medicale{% endblock %}
+
+{% block body %}
+
+
+      <section id="heromedicale">
+        <div class="container-fluid banner d-flex align-items-end justify-content-center "> 
+          <div class="row ">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-white" style=" padding:50px!important;background:linear-gradient(336deg, rgba(20, 12, 12, 1), rgba(10,0,255,0)150% )">  
+              <h2 class=" h1 text-responssive text-center text-capitalize" style="padding:50px!important; border-top:3px solid white; border-bottom:3px solid white">EQUIPEMENT MEDICALE</h2>
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <section id="utilit">
+    <div class="container">
+                  
+     <div class="row d-flex align-items-center">
+              
+           <div class="col-lg-8 col-md-12 ">
+             <h2 class="h2-responsive font-weight-bold mb-3 mt-5"> {{ categories.titre }} </h2>
+               <p class="lead w-responsive mb-3">{{ categories.description}}</p>
+           </div>     
+           <div class="col-lg-4 col-md-12 col-sm-12">
+               <img src="{{asset ('uploads/' ~ categories.images) }}" class="img-fluid" alt="image{{ categories.titre }}">
+           </div>
+   
+     </div>
+   </div>    
+  </section>                  
+              
+      <section id="souscat" > 
+                <div class="container"> 
+                    {% for sousCategorie in sousCategories %}     
+                           <div class="row shadow-lg bg-white rounded mb-5 d-flex align-items-center">
+                           
+                                 {% if sousCategorie.images is not null %}
+                                   <div class="col-lg-3  col-md-12 col-sm-12 nonpad">
+                                     <img class="card-img-top img-fluid"  src="{{ asset ('uploads/' ~ sousCategorie.images) }}" class="image.{{ sousCategorie.type }}" alt="{{ sousCategorie.type }}" >
+                                   </div>
+                                 {% endif %} 
+                                 
+                                   <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                                    <h3 class="text-responsive font-weight-bold text-center mt-3">{{ sousCategorie.type }}</h3>
+                                   </div>
+                                   <div class="col-lg-6 col-md-12 col-sm-12">
+                                   
+                                     <p class="lead  w-responsive mb-3" >{{ sousCategorie.typeDescription }}</p>
+                                   </div>     
+                            </div>      
+                   
+                
+                              <div class="row " id="pell">
+                                {% if is_granted ('ROLE_EDITEUR') %}
+
+                                <h2 class="h2-responsive font-weight-bold mb-3 mt-5"> NOS PRODUITS  </h2>
+                     {% for produit in sousCategorie.produits %}            
+                                 
+                                     <div class="col-lg-3 col-md-6 col-sm-12 mb-5 ">
+                                          <div class="card bordble mt-5">
+                                                <img src="{{asset ('uploads/' ~ produit.images) }}" class="card-img-top" alt="image {{ produit.nom }}">
+                                              <div class="card-body ">
+                                                
+                                             
+                                           
+                                                  <ul class="">
+                                                    <li class="row"><h3 class="text-responsive font-weight-bold ">{{ produit.marque }}</h3></li>
+                                                    <li class="row"><h4 class="text-responsive">{{ produit.marque }}</h4></li>
+                                                    <li class="row"><h4 class="text-responsive ">{{ produit.etat }}</h4></li>
+                                                    <li class="row"><p class="text-responsive ">{{ produit.description }}</p></li>
+                                                    <li><button type="button" class="btn btn-outline-primary"><a  href="{{ path('produits_contactmessage', {id : produit.id }) }}"><strong>Contactez-nous</strong></a></button></li>
+                        
+                                                  </ul>
+                                            </div> 
+                                         </div>
+                                    </div>
+                                    {% endfor %}
+                                  {% endif %}
+                              </div>
+                   
+                           
+                  
+                    
+                             
+                        {% endfor %}
+                        </div>         
+    </section>
+    <section id="utilit">
+      <div class="container ">
+        <h3 class="h1 text-responsive font-weight-bold mb-3 "> Nos Services </h3>
+        {% for service in categories.service %}          
+      <div class="row d-flex align-items-center mb-5 "style="border-top:1px solid black">
+                
+            <div class="col-lg-8 col-md-12 ">
+              <h3 class=" h3 text-responsive font-weight-bold mb-5 mt-3"> {{ service.titre }} </h3>
+                <p class="lead w-responsive mb-3">{{ service.description}}</p>
+            </div>     
+            <div class="col-lg-4 col-md-12 col-sm-12 d-flex align-items-center">
+                <img src="{{asset ('uploads/' ~ categories.images) }}" class="img-fluid" alt="image{{ categories.titre }}">
+            </div>
+    
+      </div>
+      {% endfor %}
+    </div>
+    </section>
+    
+
+                 
+  {% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+  {% block title %}Environnement{% endblock %}
+  
+  {% block body %}
+
+ <section id="heroEnvir">
+    <div class="container-fluid banner d-flex align-items-end justify-content-center "> 
+        <div class="row ">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-white" style=" padding:50px!important;background:linear-gradient(336deg, rgba(20, 12, 12, 1), rgba(10,0,255,0)150% )">  
+            <h2 class=" h1 text-responssive text-center text-capitalize" style="padding:50px!important; border-top:3px solid white; border-bottom:3px solid white">Sollutions Environnementales</h2>
+          </div>
+        </div>
+      </div>
+</section>
+
+<section id="utilit">
+  <div class="container">
+                
+   <div class="row d-flex align-items-center">
+            
+         <div class="col-lg-8 col-md-12 ">
+           <h2 class="h2-responsive font-weight-bold mb-3 mt-5"> {{ categories.titre }} </h2>
+             <p class="lead w-responsive mb-3">{{ categories.description}}</p>
+         </div>     
+         <div class="col-lg-4 col-md-12 col-sm-12">
+             <img src="{{asset ('uploads/' ~ categories.images) }}" class="img-fluid" alt="image{{ categories.titre }}">
+         </div>
+ 
+   </div>
+ </div>
+</section>
+  <section id="souscat">
+    {% for sousCategorie in sousCategories %}
+        <div class="container"> 
+            
+              <div class="row shadow-lg bg-white rounded mb-5 d-flex align-items-center">
+              
+                    {% if sousCategorie.images is not null %}
+                      <div class="col-lg-3 nonpad col-md-12 col-sm-12">
+                        <img class="card-img-top img-responssive"  src="{{ asset ('uploads/' ~ sousCategorie.images) }}" class="image.{{ sousCategorie.type }}" alt="images {{ sousCategorie.type }}" >
+                      </div>
+                    {% endif %} 
+                    
+                      <div class="col-lg-3 col-md-6 text-center">
+                        <h3 class="h1-responsive font-weight-bold text-center mt-3">{{ sousCategorie.type }}</h3>
+                      </div>
+                      <div class="col-lg-6 col-md-12 ">
+                      
+                        <p class="lead  w-responsive mb-3" >{{ sousCategorie.typeDescription }}</p>
+                      </div>     
+              </div>      
+      
+             
+            
+                 
+                      <div class="row tel text-center mt-5  mb-5 ">
+                        {% if is_granted ('ROLE_EDITEUR')  %}
+                                     <h2 class="h2-responsive font-weight-bold mb-5 mt-5"> NOS SOLUTIONS </h2>
+                                <div class="row main-hero-content d-flex justify-content-between "> 
+                                  
+                                     {% for solution in sousCategorie.solutions %}
+                                 
+
+                                    <div class="col-lg-5 col-md-10 col-sm-10 pan ">
+                                        
+                                         <h4 class="text-responsive font-weight-bold text-center mt-3">{{ solution.titre }}</h4>
+                                         <p class="lead text-responsive ">{{ solution.description}}</p>
+                                         {#<button type="button" class="btn btn-outline-primary"><a  href="{{ path('services_contactServicesmessage', {id : service.id }) }}"><strong>Contactez-nous</strong></a></button>#}
+                        
+                                     </div>
+                                 
+                                    {% endfor %} 
+                             </div>
+                             {% endif %}
+                      </div>
+    
+        <div class="row" id="projects">
+           
+            {% for produit in sousCategorie.produits %}   
+  
+  
+                    <div class="col-lg-3 col-md-12 mb-lg-0 mb-4">
+                        <!--Featured image-->
+                            <div class="view overlay rounded z-depth-1">
+                                <img src="{{asset ('uploads/' ~ produit.images) }}" class="img-responsives" alt="image.{{ produit.nom }}">
+                        
+                            </div>
+                        <!--Excerpt-->
+                            <div class="card-body pb-0">
+                                <ul class="">
+                                    <li class="row"><h4 class="text-responsive font-weight-bold text-center">{{ produit.nom}}</h4></li>
+                                    <li class="row"><h5 class="text-responsive text-center">{{ produit.marque }}</h5></li>
+                                    <li class="row"><h5 class="text-responsive text-center" >{{ produit.etat }}</h5></li>
+                                  
+                                    <li class="row"><button type="button" class="btn btn-outline-primary "><a  href="{{ path('produits_contactmessage', {id : produit.id }) }}"><strong>Contactez-nous</strong></a></button></li>
+                
+                            
+                            </div>
+                    </div>
+  
+                
+            {% endfor %}   
+        </div>
+
+  
+
+                              
+                        </div>
+                  
+  
+                
+           {% endfor %}
+           </div>         
+        </section>
+
+ 
+{% endblock %}

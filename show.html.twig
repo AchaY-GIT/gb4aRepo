@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+    <br>
+    <div class="container mt-5">
+        <div class="table-responsive ">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                   {# <tr>
+                        <th>Roles</th>
+                        {% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}  
+                       <td class="row">Utilisateur</td>  
+                        {% elseif role == "ROLE_EDITEUR" %}
+                        <td class="row">Editeur</td>
+                        {% elseif role == "ROLE_ADMIN" %}
+                      <td class="row"> Administarateur </td>
+                      {% endif %}
+                      {% endfor %}
+                    </tr>#}
+                    <tr>
+                        <th>Roles</th>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <th>Password</th>
+                        <td>{{ user.password }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td>{{ user.prenom }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+    <a href="{{ path('user_index') }}" class="btn btn-primary">retour</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-danger">modifier</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+</div>
+</div>
+{% endblock %}

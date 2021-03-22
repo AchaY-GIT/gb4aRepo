@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisez votre mot de pass{% endblock %}
+
+{% block body %}
+<section id="reset"
+    <div class="container-fluid text-responsive"style="  background:url(../img/securisation.jpeg) no-repeat center center fixed;background-size:cover;  
+width: 100%;
+min-height: 60vh; 
+height: auto;
+color: #fff;
+padding: 10px;
+">
+       <div class="row">  
+            <div class="col-lg-4 col-md-12 col-sm-12 mt-5 offset-md-4 formuler"style=" opacity: 1; 
+            background:linear-gradient(336deg, rgb(1, 1, 31), rgba(5, 3, 68, 0.658)99.71% )!important;
+           ">
+                 <h2 class="h1-responsive font-weight-bold mb-5 mt-5">Modifiez votre mot de passe</h2>
+
+                {{ form_start(resetForm) }}
+                    {{ form_row(resetForm.plainPassword, {
+                        label: 'mot de pass'
+                    }) }}
+                    <button class="btn btn-primary">Réinitialisation de mot de pass</button>
+                {{ form_end(resetForm) }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

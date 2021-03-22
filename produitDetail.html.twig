@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Detail du produit{% endblock %}
+
+{% block body %}
+<section id="produit">
+    <br> 
+    <div class="container">
+        
+        <div class="row "> 
+        
+            
+                <div class="col-lg-6 col-md-2  col-sm-12 "> 
+
+                  <img src="{{ asset ('uploads/' ~ produit.images) }}" class="img-responsive w-100" alt="image-{{ produit.nom }}">
+                 
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 text-center"> 
+                
+                    <ul class="">
+                        <li class="row"><h4 class="h2 text-responsive font-weight-bold text-center">{{ produit.nom}}</h4></li>
+                        <li class="row"><h5 class="text-responsive text-center">{{ produit.marque }}</h5></li>
+                        <li class="row"><h5 class="text-responsive text-center" >{{ produit.etat }}</h5></li>
+                        <li class="row"><h5 class="text-responsive text-center" >{{ produit.prix }}</h5></li>
+                        <button type="button" class="btn btn-outline-primary "><a  href="{{ path('produits_contactmessage', {id : produit.id }) }}"><strong>Contactez-nous</strong></a></button>
+
+                    </ul>
+                </div>
+        </div>
+        <div class="row ">
+                {{produit.description }}   
+        </div>
+    </div>
+</section>
+{% endblock %}

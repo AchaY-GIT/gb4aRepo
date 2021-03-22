@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+
+ {# {% block body %}
+<br>
+<div class="container mt-5">
+    <div class="table-responsive ">
+    <h1>Liste des utilisateurs</h1>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Roles</th>
+
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr class="col text-responsive">
+                <td >{{ user.id }}</td>
+                <td >{{ user.nom }}</td>
+                <td >{{ user.prenom }}</td>
+                <td >{{ user.email }}</td>
+                {% for role in user.roles %}
+                    {% if role == "ROLE_USER" %}  
+                   <td class="row">Utilisateur</td>  
+                    {% elseif role == "ROLE_EDITEUR" %}
+                    <td class="row">Editeur</td>
+                    {% elseif role == "ROLE_ADMIN" %}
+                  <td class="row"> Administarateur </td>
+
+                   {% endif %}
+                {% endfor %}
+            
+                <td>
+                    <a href="{{ path('user_show', {'user': user.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('user_edit', {'user': user.id}) }}" class="btn btn-danger">modifier</a>
+                </td>
+        </tr>
+            <td>
+               
+            </td>
+            {% else %}
+            <tr>
+                <td colspan=5> il n ya pas de user </td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %} #}
+
+
+
+
+    {% block body %}
+    
+  <div class="container mt-5">
+        <div class="table-responsive ">
+        <h1>Liste des utilisateurs</h1>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+             
+               
+                <td>
+                    <a href="{{ path('user_show', {'user': user.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('user_edit', {'user': user.id}) }}" class="btn btn-danger">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+    <a href="{{ path('user_new') }}"" class="btn btn-primary offset-md-1">Creer un nouveau</a>
+{% endblock %}

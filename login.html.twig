@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connection{% endblock %}
+
+{% block body %}
+<section id="login">
+
+
+<div classs="container-fluid" style=" background:url(../img/securisation.jpeg) no-repeat center center fixed;background-size:cover;  
+width: 100%;
+min-height: 60vh; 
+height: auto;
+color: #fff;
+padding: 10px;">
+    <div class="row">
+    <div class="col-lg-4 col-md-12 col-sm-12 mt-5 offset-md-4 text-white formuler style="  opacity: 1; 
+    background:linear-gradient(336deg, rgb(1, 1, 31), rgba(5, 3, 68, 0.658)99.71% )!important;">
+        <h2 class="h1-responsive font-weight-bold mb-5 mt-5">S'authentifier</h2>
+            
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger ">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3 mr-1 ml-1">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnection</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Veuillez vous authentifiez</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html #}
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+            </label>
+        </div>
+        <a href="{{ path('app_forgot_password_request') }}">Mot-de-passe oublié</a>
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form></div>
+</div>
+</div>
+</section>
+{% endblock %}
